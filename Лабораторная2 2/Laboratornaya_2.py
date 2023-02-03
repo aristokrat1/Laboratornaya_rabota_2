@@ -1,6 +1,6 @@
 class Book:
-    def __init__(self, id: int, name: str, pages:int):
-        self.id = id
+    def __init__(self, id_: int, name: str, pages: int):
+        self.id_ = id_
         self.name = name
         self.pages = pages
 
@@ -8,7 +8,7 @@ class Book:
         return f"Книга {self.name!r}"
 
     def __repr__(self) -> str:
-        return f"Book(id = {self.id}, name = {self.name!r}, pages = {self.pages})"
+        return f"Book(id = {self.id_}, name = {self.name!r}, pages = {self.pages})"
 
 book1 = Book(112233, "Фауст", 500)
 print(str(book1))
@@ -20,9 +20,8 @@ class Library:
 
     def get_next_book_id(self):
         if len(self.books) == 0:
-            index = 1
-        index = len(self.books) + 1
-        return index
+            return 1
+        return self.books.index(self.books[-1]) + 2
 
     def get_index_by_book_id(self, book_name: str):
         if book_name in self.books:
@@ -30,6 +29,6 @@ class Library:
         else:
             raise ValueError("Книги с запрашиваемым id не существует")
 
-library = Library(["Фауст","Гамлет", "Маленький принц"])
+library = Library(["Фауст", "Гамлет", "Маленький принц"])
 print(library.get_next_book_id())
 print(library.get_index_by_book_id("Гамлет"))
